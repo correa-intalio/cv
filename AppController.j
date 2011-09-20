@@ -7,6 +7,10 @@
  */
 
 @import <Foundation/CPObject.j>
+@import "DCColor.j"
+@import "URLTextField.j"
+@import "LPAnchorButton.j"
+
 
 /*!
 
@@ -72,9 +76,9 @@ Lucida console
             font:[CPFont boldFontWithName:@"Courier New" size:16.0]];
 
 
-    [self addLabel:"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur"
+    [self addLabel:"Neque quisquam est qui dolorem ipsum quia dolor sit amet, consectetur"
             origin:CGPointMake(310, 400)
-            color:[CPColor colorWithCalibratedRed:255 / 255 green:158 / 255 blue:53 / 255 alpha:1]
+            color:[DCColor goldenColor]
             font:[CPFont boldSystemFontOfSize:16.0]];
 
     [self addLabel:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nVivamus tristique rhoncus dignissim. Aliquam erat volutpat. \nNullam tempus, nunc in auctor sagittis, neque urna molestie leo, \nac vehicula enim felis at tortor. Nulla facilisi. \nMaecenas adipiscing hendrerit quam, quis sollicitudin felis \ncondimentum nec. Phasellus blandit felis ac nunc vulputate eget \npretium metus cursus. Pellentesque et neque sit amet eros \ncongue tempus nec vitae leo."
@@ -85,7 +89,7 @@ Lucida console
 
     [self addLabel:"Diego Martín Correa"
             origin:CGPointMake(10, 10)
-            color:[CPColor colorWithCalibratedRed:253 / 255 green:208 / 255 blue:23 / 255 alpha:1]
+            color:[DCColor goldenColor]
             font:[CPFont boldSystemFontOfSize:48.0]];
 
     [self addLabel:"Software Developer, Technologist and Web Junkie"
@@ -93,30 +97,76 @@ Lucida console
             color:[CPColor whiteColor]
             font:[CPFont boldSystemFontOfSize:24.0]];
 
-    [self addLabel:"How You Can Reach Me: Email | LinkedIn"
-            origin:CGPointMake(15, 950)
-            color:[CPColor whiteColor]
-            font:[CPFont boldFontWithName:@"Courier New" size:20.0]];
-
     [self addLabel:"education"
             origin:CGPointMake(20, 300)
-            color:[CPColor colorWithCalibratedRed:255 / 255 green:158 / 255 blue:53 / 255 alpha:1]
+            color:[DCColor goldenColor]
             font:[CPFont boldSystemFontOfSize:48.0]];
 
     [self addLabel:"intership"
             origin:CGPointMake(20, 500)
-            color:[CPColor colorWithCalibratedRed:255 / 255 green:158 / 255 blue:53 / 255 alpha:1]
+            color:[DCColor goldenColor]
             font:[CPFont boldSystemFontOfSize:48.0]];
 
     [self addLabel:"personal \n      skills"
             origin:CGPointMake(20, 800)
-            color:[CPColor colorWithCalibratedRed:255 / 255 green:158 / 255 blue:53 / 255 alpha:1]
+            color:[DCColor goldenColor]
             font:[CPFont boldSystemFontOfSize:48.0]];
 
 
 
+    [self addLabel:"How You Can Reach Me:"
+            origin:CGPointMake(15, 950)
+            color:[CPColor whiteColor]
+            font:[CPFont boldFontWithName:@"Courier New" size:20.0]];
+
+    [self addLabel:" | "
+            origin:CGPointMake(320, 950)
+            color:[CPColor whiteColor]
+            font:[CPFont boldFontWithName:@"Courier New" size:20.0]];
+
+    var emailLabel = [LPAnchorButton buttonWithTitle:@"Email"];
+    [emailLabel setFrame:CGRectMake(270,952,150,35)];
+    // We want to the underline only when hovering
+    [emailLabel setUnderlineMask:LPAnchorButtonHoverUnderline];
+
+    // Set the colors
+    [emailLabel setTextColor:[CPColor whiteColor]];
+    [emailLabel setTextHoverColor:[CPColor colorWithHexString:@"aaa"]];
+    [emailLabel setFont:[CPFont boldFontWithName:@"Courier New" size:20.0]];
+    // Set the target & action just like a CPButton
+    [emailLabel setTarget:self];
+    [emailLabel setAction:@selector(didClickEmailMe:)];
+
+
+    var linkedinLabel = [LPAnchorButton buttonWithTitle:@"LinkedIn"];
+    [linkedinLabel setFrame:CGRectMake(350,952,150,35)];
+    // We want to the underline only when hovering
+    [linkedinLabel setUnderlineMask:LPAnchorButtonHoverUnderline];
+
+    // Set the colors
+    [linkedinLabel setTextColor:[CPColor whiteColor]];
+    [linkedinLabel setTextHoverColor:[CPColor colorWithHexString:@"aaa"]];
+    [linkedinLabel setFont:[CPFont boldFontWithName:@"Courier New" size:20.0]];
+    // Set the target & action just like a CPButton
+    [linkedinLabel setTarget:self];
+    [linkedinLabel setAction:@selector(didClickLinkedIn:)];
+
+
+    [backgroundView addSubview:emailLabel];
+    [backgroundView addSubview:linkedinLabel];
+
 
     [theWindow orderFront:self];
+}
+
+- (void)didClickEmailMe:(id)aSender
+{
+    window.open ("mailto:diegomartincorrea@gmail.com?cc=a_e_r_e_a@yahoo.com.ar&subject=Job offer","email");
+}
+
+- (void)didClickLinkedIn:(id)aSender
+{
+    window.open ("http://www.linkedin.com/pub/diego-mart%C3%ADn-correa/13/b8b/9b","linkedin");
 }
 
 - (void)addBackgroundImageView
